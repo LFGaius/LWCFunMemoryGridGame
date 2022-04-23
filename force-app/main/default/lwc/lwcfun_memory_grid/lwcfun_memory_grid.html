@@ -1,0 +1,15 @@
+<template>
+    <lightning-layout class="slds-size_12-of-12" multiple-rows vertical-align="center">
+        <template for:each={elementsList} for:item="element">
+            <lightning-layout-item key={element.index} data-id={element.index} size="2" class="grid-element slds-align_absolute-center" onclick={onUnhideElement} padding="around-small">
+                <img src={element.iconSrc} class={element.imgClass}/>
+            </lightning-layout-item>       
+        </template>
+    </lightning-layout>
+    <lightning-layout vertical-align="center" horizontal-align="center" class="count-pair-block" if:false={hasWon}>
+        <lightning-layout-item flexibility="shrink">{numPairFound}/{totalNumPairs}</lightning-layout-item>
+    </lightning-layout>
+    <lightning-layout vertical-align="center" horizontal-align="center" if:true={hasWon} class="slds-m-top_small">
+        <lightning-layout-item flexibility="shrink" class="replay-button" onclick={onReplay}>REPLAY</lightning-layout-item>
+    </lightning-layout>
+</template>

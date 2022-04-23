@@ -1,0 +1,46 @@
+.grid-element{
+    font-size: 45px;
+    background:#f69d35;
+    border: solid white 3px;
+    cursor: pointer;
+}
+
+.grid-element:hover{
+    background:#d7892f;
+}
+
+img,.empty-block{
+    width: 49px;
+    height: 49px;
+}
+
+.img-not-hidden{
+    transition-duration: 0.5s;
+    opacity: 1;
+}
+
+.img-hidden{
+    transition-duration: 0.5s;
+    opacity: 0;
+}
+
+.count-pair-block{
+    font-size: 80px;
+    font-weight: 900;
+    text-align: center;
+    color: #975f23;
+}
+
+.replay-button{
+    background: #974e00;
+    color: white;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 900;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.replay-button:hover{
+    opacity: 0.8;
+}
