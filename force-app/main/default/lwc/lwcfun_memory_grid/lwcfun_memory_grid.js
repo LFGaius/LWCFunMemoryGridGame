@@ -1,5 +1,6 @@
-import { LightningElement } from 'lwc';
+import { LightningElement,api } from 'lwc';
 import LWCFUN_RESOURCES from "@salesforce/resourceUrl/lwcfun_icons";
+import incrementVictories from '@salesforce/apex/LWCFUN_MemoryGameController.incrementVictories';
 const SALESFORCE_IMG_SRC= LWCFUN_RESOURCES+'/salesforce.png';
 const TRUST_IMG_SRC= LWCFUN_RESOURCES+'/trust.png';
 const DOLLAR_IMG_SRC= LWCFUN_RESOURCES+'/dollar.png';
@@ -120,14 +121,24 @@ const ORIGINAL_GAME_SET=[
     }
 ];
 export default class Lwcfun_memory_grid extends LightningElement {
-
+    @api recordId;
     elementsList=[];
     totalNumPairs=9;
-    numPairFound=0;
+    numPairFound;
     toBeComparedElementIndex=-1;//-1 stands for a non-existent thing
+    hasWon;
+    
+    checkVictory(){
+        const hasWon=this.totalNumPairs == this.numPairFound;
+        if(hasWon ){
+            this.incrementVictoriesOnContact();
+            this.hasWon=hasWon;
+        }
+    }
 
-    get hasWon(){
-        return this.totalNumPairs == this.numPairFound;
+    async incrementVictoriesOnContact(){
+        await incrementVictories({contactId:this.recordId})
+        this.inc=true
     }
 
     /**
@@ -154,12 +165,13 @@ export default class Lwcfun_memory_grid extends LightningElement {
                     this.showElement(elementsList,elementIndex);
                     this.toBeComparedElementIndex=-1;//since the pair is found, it's no longer to be compared
                     this.numPairFound++;
+                    this.checkVictory();
                 }else{
                     this.showElement(elementsList,elementIndex);
                     setTimeout(()=>{
                         //we hide again the element after some times 
                         this.hideElement(elementsList,elementIndex);
-                    },500)
+                    },200)
                 }
             }else{
                 //no element is currently to be compared

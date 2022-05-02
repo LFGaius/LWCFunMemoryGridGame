@@ -20,7 +20,7 @@ img,.empty-block{
 }
 
 .img-hidden{
-    transition-duration: 0.5s;
+    transition-duration: 0.2s;
     opacity: 0;
 }
 
