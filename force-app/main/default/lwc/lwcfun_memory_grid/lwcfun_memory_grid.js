@@ -138,7 +138,6 @@ export default class Lwcfun_memory_grid extends LightningElement {
 
     async incrementVictoriesOnContact(){
         await incrementVictories({contactId:this.recordId})
-        this.inc=true
     }
 
     /**
