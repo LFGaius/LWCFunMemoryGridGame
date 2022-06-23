@@ -44,7 +44,7 @@ jobs:
         run: sfdx auth:sfdxurl:store -f ./SFDX_DEV_URL.txt -s -a integration
 
       - name: 'Deploy the entire branch to Developer org'
-        run: sfdx force:source:deploy -p force-app
+        run: sfdx force:source:deploy -p force-app --testlevel RunLocalTests --json
 
       - name: 'Deploy destructive changes (if any) to Developer org'
         run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" --checkonly --ignorewarnings
